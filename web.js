@@ -1,16 +1,12 @@
 var express = require('express');
 var app = express();
-var fs = require('fs');
 app.use(express.logger());
 
-app.get('/', function(request, response) {
-	fs.readFileSync('index.html', function(err, data) {
-	if(err) throw err;
- 	console.log(data);
+app.get('/', function(req, res) {
+	var fs = require('fs');
+	var buf = new Buffer('index.html'), 'utf-8');
+	response.send(buf.toString());
 });
- // response.send('Kickstarter from scratch');
-});
-
 var port = process.env.PORT || 5000;
 app.listen(port, function() {
   console.log("Listening on " + port);
